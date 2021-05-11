@@ -32,17 +32,17 @@ This will allow  smtplib to send an email from your address if you can send mail
 
 Run the following to install the necessary python libraries:
 ```
-$ sudo pip install datetime pytz requests arxiv
+$ pip install datetime pytz requests arxiv
 ```
 You need to use sudo because the system python installation will be used.
 
 Next, we want the script to be called once a day. Edit crontab by running
 ```
-$ sudo crontab -e
+$crontab -e
 ```
 and add the following line
 ```
-5 0 * * * /usr/bin/python2 /path/to/arxiv-filter/run.py
+5 0 * * * python /path/to/arxiv-filter/run.py
 ```
 which will run the script once a day at 12:05am.
 
