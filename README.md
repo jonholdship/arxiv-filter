@@ -1,10 +1,12 @@
 # Overview
 
-Arxiv filter is similar to the standard arxiv email digests, but allows you to filter using keywords so that the email digests are significantly shorter. This is useful if you want to target a subset of a category (e.g., not all of cs.AI), and filter by areas of research (e.g, "reinforcement learning"), authors (e.g., "Yann LeCun"), or some other filter keyword.
+A fork of [Arxiv-filter](https://github.com/gkahn13/arxiv-filter) updated to the latest Arxiv API and with some quality of life updates.
+
+ArxivFilter checks the Arxiv for you each day, filtering by both your chosen and categories and then by keyword. You supply a list of keywords and it will only send you articles where the abtract, title or author list contains at least one of those keywords.
 
 # Installation
 
-You should install this on a machine that is always on and has internet access. The installation has been tested on Ubuntu 16.04, but should be easy to replicate on other Unix systems. The installation process should take less than 10 minutes.
+You should install this on a machine that is always on and has internet access. Many Arxiv readers will have access to an institute machine which is configured with email access, this allows us to use smtplib to send the result and is recommended.
 
 #### Choose categories and keywords
 
@@ -13,20 +15,18 @@ Arxiv filter works by finding all articles that
 2. Are in one of the categories listed in categories.txt
 3. Have at least one of the keywords listed in keywords.txt in either the title, author list, or abstract
 
-You should change categories.txt and keywords.txt based on your interests. (Note: capitalization does not matter for keywords.)
+You should change categories.txt and keywords.txt based on your interests. Keywords are not case-sensitive.
 
-#### Setup Mailgun
+#### Setup Email
 
-We use mailgun in order to send the arxiv filter digests.
+For simplicity, we just use the smtplib library. Create a config.py file with the following contents
 
-Create a free account at [mailgun](https://www.mailgun.com/). You get 10,000 emails per month for free. Do not enter any credit card information if asked for.
+SERVER = "localhost"
+FROM = "your_email_on_the_server"
+TO =["recipient_address","2nd_recipient_address"]
+SUBJECT ="Your Arxiv Report"
 
-Log in and click on "Domains" in the top menu. One sandbox will already exist, click on it, and do the following:
-1. Copy the sandbox name into mailgun-sandbox-name.txt
-2. Copy the API key into mailgun-api-key.txt
-3. Click on "Manage Authorized Recipients" and add your email account. Also add your email account to mailgun-email-recipient.txt
-
-Note: do not keep your mailgun sandbox or api key on github or any other publicly accessible place. Mailgun will notice it and disable your account.
+This will allow  smtplib to send an email from your address if you can send mail from your terminal (almost certainly the case if you run this on a university server).
 
 #### Setup the script
 
@@ -48,6 +48,6 @@ which will run the script once a day at 12:05am.
 
 If you want to immediately test if the installation works, do
 ```
-$ /usr/bin/python2 /path/to/arxiv-filter/run.py
+$ python /path/to/arxiv-filter/run.py
 ```
 (Note: arxiv filter searches over submissions from the past week and---after filtering---only emails you submissions that it has not sent you before. If you want to start from scratch, delete the file previous_arxivs.txt)

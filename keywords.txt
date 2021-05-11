@@ -1,4 +1,5 @@
-robot
 learning
-neural network
-Yann Lecun
+MCMC
+Bayesian
+inference
+
