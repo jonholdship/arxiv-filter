@@ -19,7 +19,7 @@ You should change categories.txt and keywords.txt based on your interests. Keywo
 
 #### Setup Email
 
-For simplicity, we just use the smtplib library. Create a config.py file with the following contents
+For simplicity, we just use the smtplib library. Create an email_config.py file with the following contents
 
 SERVER = "localhost"
 FROM = "your_email_on_the_server"
@@ -32,19 +32,17 @@ This will allow  smtplib to send an email from your address if you can send mail
 
 Run the following to install the necessary python libraries:
 ```
-$ pip install datetime pytz requests arxiv
+$ pip install -r requirements.txt
 ```
-You need to use sudo because the system python installation will be used.
-
 Next, we want the script to be called once a day. Edit crontab by running
 ```
 $crontab -e
 ```
 and add the following line
 ```
-5 0 * * * python /path/to/arxiv-filter/run.py
+0 7 * * * python /path/to/arxiv-filter/run.py
 ```
-which will run the script once a day at 12:05am.
+which will run the script once a day at 7:00am.
 
 If you want to immediately test if the installation works, do
 ```
