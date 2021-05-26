@@ -91,7 +91,7 @@ class ArxivFilter(object):
         message = 'Subject: {}\n\n{}'.format(SUBJECT, txt)
         server = smtplib.SMTP(SERVER)
         server.set_debuglevel(3)
-        server.sendmail(FROM, TO, message)
+        server.sendmail(FROM, TO, message.encode("utf-8"))
         server.quit()
 
     def run(self):

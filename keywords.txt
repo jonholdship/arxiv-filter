@@ -1,6 +1,9 @@
 learning
 neural
 MCMC
+random forest
+xgboost
+radex
 Bayesian
 nested
 inference

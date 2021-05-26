@@ -1,2 +1,6 @@
 email_config.py
 previous-arxivs.txt
+keywords.txt
+categories.txt
+__pycache__/
+.ipynb_checkpoints/
